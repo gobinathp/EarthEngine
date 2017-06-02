@@ -1,0 +1,27 @@
+//Location for the bounds
+var chennai = ee.Geometry.Point(80.1947, 13.0313);
+
+//add the city to map
+Map.addLayer(chennai);
+
+//Required date data - based on research need
+var start = ee.Date('2014-01-01');
+var end = ee.Date('2016-01-01');
+
+//Image Collection
+var ImgCollection = ee.ImageCollection('LANDSAT/LC8_L1T')
+.filterBounds(chennai)
+.filterDate(start,end)
+.sort('CLOUD_COVER', false);
+
+//print number of images
+var count = ImgCollection.size();
+print('Size of Image Collections :', count);
+
+//sort by cloud cover property
+var cc = ee.Image(ImgCollection.sort('CLOUD_COVER').first());
+print ('Least Cloudy Images :', cc);
+
+//getting metadata
+var date = cc.get('DATE_ACQUIRED');
+print ('Date Details', date);
