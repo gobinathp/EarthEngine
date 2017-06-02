@@ -1,0 +1,9 @@
+//Loading the DATASET
+var Chennai_LANDSAT = ee.Image("LANDSAT/LC8_L1T_8DAY_RAW/20170218");
+
+//Zoom to Particular Place
+Map.centerObject(Chennai_LANDSAT, 12);
+var Color = {bands:['B4','B3','B2'], min: 5000, max: 15000 }; // for the color combination
+
+//Add Image as Layer with true color band combination
+Map.addLayer(Chennai_LANDSAT, Color, 'True Color'); 
